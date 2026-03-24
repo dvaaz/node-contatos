@@ -11,7 +11,13 @@ CREATE TABLE IF NOT EXISTS `db_agenda`.`tb_usuarios` (
   `nome_usuario` VARCHAR(150) NOT NULL,
   `email_usuario` VARCHAR(150) NOT NULL,
   `senha_usuario` VARCHAR(255) NOT NULL,
+  `id_role` INT NOT NULL,
   PRIMARY KEY (`id_usuario`),
+  CONSTRAINT `fk_usuario_role`
+    FOREIGN KEY (`id_role`)
+    REFERENCES `db_agenda`.`tb_roles` (`id_role`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   UNIQUE (`email_usuario`)
 );
 
@@ -41,18 +47,18 @@ CREATE TABLE IF NOT EXISTS `db_agenda`.`tb_roles` (
 
 
 -- Tabela de relacionamento entre usuário e roles (n:n)
-CREATE TABLE IF NOT EXISTS `db_agenda`.`tb_usuarios_roles` (
-  `id_usuario` INT NOT NULL,
-  `id_role` INT NOT NULL,
-  PRIMARY KEY (`id_usuario`, `id_role`), 
-  CONSTRAINT `fk_usuarios_roles_usuario`
-    FOREIGN KEY (`id_usuario`)
-    REFERENCES `tb_usuarios` (`id_usuario`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_usuarios_roles_role`
-    FOREIGN KEY (`id_role`)
-    REFERENCES `tb_roles` (`id_role`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS `db_agenda`.`tb_usuarios_roles` (
+--   `id_usuario` INT NOT NULL,
+--   `id_role` INT NOT NULL,
+--   PRIMARY KEY (`id_usuario`, `id_role`), 
+--   CONSTRAINT `fk_usuarios_roles_usuario`
+--     FOREIGN KEY (`id_usuario`)
+--     REFERENCES `tb_usuarios` (`id_usuario`)
+--     ON DELETE CASCADE
+--     ON UPDATE CASCADE,
+--   CONSTRAINT `fk_usuarios_roles_role`
+--     FOREIGN KEY (`id_role`)
+--     REFERENCES `tb_roles` (`id_role`)
+--     ON DELETE CASCADE
+--     ON UPDATE CASCADE
+-- );
