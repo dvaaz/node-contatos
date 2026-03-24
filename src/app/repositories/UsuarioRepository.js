@@ -1,6 +1,7 @@
-import db from "../database/QueryHelper"
 const { gerarHash } = require('./security/hash');
+import queryHelper from "../database/QueryHelper"
 
+const db = new queryHelper();
 class ContatosRepository {
 
     // A ser utilizado apenas por ADMINS
@@ -78,3 +79,5 @@ class ContatosRepository {
     }
 
 }
+
+export default new UsuarioRepository()

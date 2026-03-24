@@ -1,5 +1,6 @@
-import db from "../database/QueryHelper"
+import queryHelper from "../database/QueryHelper"
 
+const db = new queryHelper();
 class ContatosRepository {
 
     // Exibir todos os contatos
@@ -61,38 +62,38 @@ class ContatosRepository {
         
     // Array para SET
     try{
-        const setParts = [];
+        const setParts = []; // prepara uma variavel para armazenar os campos de forma dinamica
         const valores = [];
+        // Verifica de forma dinamica quais campos foram fornecidos e adiciona à query
+            if (params.nome_contato !== undefined) {
+                setParts.push("nome_contato = ?");
+                valores.push(params.nome_contato);
+            }
+            if (params.telefone_contato !== undefined) {
+                setParts.push("telefone_contato = ?");
+                valores.push(params.telefone_contato);
+            }
+            if (params.celular_contato !== undefined) {
+                setParts.push("celular_contato = ?");
+                valores.push(params.celular_contato);
+            }
+            if (params.email_contato !== undefined) {
+                setParts.push("email_contato = ?");
+                valores.push(params.email_contato);
+            }
+            if (params.id_usuario !== undefined) {
+                setParts.push("id_usuario = ?");
+                valores.push(params.id_usuario);
+            }
 
-        if (params.nome_contato !== undefined) {
-            setParts.push("nome_contato = ?");
-            valores.push(params.nome_contato);
-        }
-        if (params.telefone_contato !== undefined) {
-            setParts.push("telefone_contato = ?");
-            valores.push(params.telefone_contato);
-        }
-        if (params.celular_contato !== undefined) {
-            setParts.push("celular_contato = ?");
-            valores.push(params.celular_contato);
-        }
-        if (params.email_contato !== undefined) {
-            setParts.push("email_contato = ?");
-            valores.push(params.email_contato);
-        }
-        if (params.id_usuario !== undefined) {
-            setParts.push("id_usuario = ?");
-            valores.push(params.id_usuario);
-        }
-
-        if (setParts.length === 0) {
-            throw new Error("Nenhum campo para atualizar");
-        }
+            if (setParts.length === 0) {
+                throw new Error("Nenhum campo para atualizar");
+            }
 
         // Monta a query dinâmica
         const sql = `
             UPDATE db_agenda.tb_contatos
-            SET ${setParts.join(", ")}
+            SET ${setParts.join(", ")} // Transforma em string o array
             WHERE id_contato = ?;
         `;
 

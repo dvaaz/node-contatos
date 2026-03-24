@@ -1,4 +1,6 @@
-import db from "../database/QueryHelper.js"
+import queryHelper from "../database/QueryHelper"
+
+const db = new queryHelper();
 
 class UsuarioRolesRepository {
     // Criar conexao usuario-roles
