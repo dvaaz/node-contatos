@@ -1,4 +1,4 @@
-import queryHelper from "../database/QueryHelper"
+import queryHelper from "../database/queryHelper"
 
 const db = new queryHelper();
 class ContatosRepository {

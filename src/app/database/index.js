@@ -6,6 +6,7 @@ const conexao = mysql.createPool({
     // Se as variáveis de ambiente não estiverem definidas, usar credenciais padrao/ locais
     host: process.env.DB_HOST||'localhost',
     user: process.env.DB_USER||'root',
+    port: process.env.DB_PORT||3306,
     password: process.env.DB_PASS||'',
     database: 'db_agenda'
 })

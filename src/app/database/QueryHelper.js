@@ -1,6 +1,6 @@
-import conexao from '../database/conexao.js'
+import conexao from '../database/index.js'
 
-const queryHelper = {
+class queryHelper {
     
     /** Função helper que executa as queries no banco de dados de forma assíncrona e retorna os resultados
     * @param {string} sql - A string da query SQL
