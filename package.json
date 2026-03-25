@@ -1,21 +1,19 @@
 {
-  "name": "contatos",
+  "name": "fastfy-prisma",
   "version": "1.0.0",
-  "description": "\"# node-contatos\"",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dvaaz/node-contatos.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/dvaaz/node-contatos/issues"
-  },
-  "homepage": "https://github.com/dvaaz/node-contatos#readme"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "prisma": "^7.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
 }
