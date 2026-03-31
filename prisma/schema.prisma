@@ -11,3 +11,42 @@ generator client {
 datasource db {
   provider = "sqlite"
 }
+
+// Data Model: após a definição do modelo executar `npx prisma generate -name banana` para gerar o client do prisma
+
+// Usuarios
+model tb_usuarios {
+  id_usuario Int @id @default(autoincrement())
+  nome_usuario String
+  email_usuario String @unique
+  senha_usuario String
+  // Relacionamentos 1 para N
+  contatos tb_contatos[]
+  // Relacionamentos N para N
+  roles tb_roles[] @relation("UsuarioRoles", references: [id_role])
+}
+// Tabela de Roles
+model tb_roles {
+  id_role Int @id @default(autoincrement())
+  nome_role String
+  // Relacionamentos N para N
+  usuarios UsuarioRoles[]
+}
+// Tabela de associação para o relacionamento N para N entre usuários e roles
+model UsuarioRoles {
+  id_usuario Int
+  id_role Int
+  usuario tb_usuarios @relation(fields: [id_usuario], references: [id_usuario])
+  role tb_roles @relation(fields: [id_role], references: [id_role])
+  @@id([id_usuario, id_role]) // Chave primária composta
+}
+// Contatos da Agenda
+model tb_contatos {
+  id_contato Int @id @default(autoincrement())
+  nome_contato String
+  email_contato String
+  telefone_contato String
+  // Relacionamentos N para 1
+  usuario tb_usuarios @relation(fields: [id_usuario], references: [id_usuario])
+  id_usuario Int
+}
