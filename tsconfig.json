@@ -2,13 +2,13 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "rootDir": "./src", //  informa onde estão os TS para o compilador e onde estão os JS para o node
+    "outDir": "./dist", // informa onde o compilador deve colocar os JS compilados
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
-    "target": "esnext",
+    "target": "es2023",
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
