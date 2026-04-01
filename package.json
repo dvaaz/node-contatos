@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "typescript": "^6.0.2"
   },
   "dependencies": {
+    "@prisma/client": "^7.6.0",
     "fastify": "^5.8.4",
     "mysql": "^2.18.1",
     "nodemon": "^3.1.14",
