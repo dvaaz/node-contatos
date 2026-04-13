@@ -2,7 +2,7 @@ export interface Contact {
     id: number;
     nome: string;
     email: string;
-    telefone?: string;
+    telefone: string;
     userId?: number;
     // Campos opcionais para controle de criação e atualização, são definidos no backend mas podem ser solicitados pelo front
     createdAt?: Date;
