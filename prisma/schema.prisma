@@ -17,6 +17,7 @@ model Roles { // Define as responsabilidades
   name  String @unique
   createdAt DateTime @default(now())
   users Users[]
+  userRoles UserRoles[]
 
   @@map("roles") // Define como será a referência ao objeto 
 }
@@ -30,7 +31,8 @@ model Users { // Usuarios do sistema
   roles Roles @relation(fields: [roleId], references: [id])
   roleId String
   contacts Contacts[]
-
+  userRoles UserRoles[]
+  
   @@map("users") // Define como será a referência ao objeto 
 }
 
@@ -47,4 +49,15 @@ model Contacts { // Contatos do sistema
   user Users @relation(fields: [userId], references: [id])
 
   @@map("contacts") // Define como será a referência ao objeto
+}
+
+model UserRoles { // Tabela de relacionamento entre usuários e suas responsabilidades
+  id String @id @default(uuid())
+  userId Int
+  roleId String
+
+  user Users @relation(fields: [userId], references: [id])
+  role Roles @relation(fields: [roleId], references: [id])
+
+  @@map("user_roles") // Define como será a referência ao objeto
 }

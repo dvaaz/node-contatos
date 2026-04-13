@@ -9,8 +9,8 @@ export interface CreateRoleInput {
     name: string;
 }
 
-export interface RoleRepository {
+export interface roleRepository {
     create(role: CreateRoleInput): Promise<Role>;
     findByName(name: string): Promise<Role | null>; // Método para encontrar um papel por nome, que é dado único
-    delete(name: string): Promise<void>;
+    delete(name: string): Promise<boolean>;
 }

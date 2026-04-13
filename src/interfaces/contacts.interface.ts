@@ -13,7 +13,7 @@ export interface Contact {
 export interface CreateContactInput {
     nome: string;
     email: string;
-    telefone?: string;
+    telefone: string;
     userEmail: string; // Referência para o usuário dono do contato no input
 }
 
@@ -21,7 +21,7 @@ export interface CreateContactInput {
 export interface CreateContactData {
     nome: string;
     email: string;
-    telefone?: string;
+    telefone: string;
     userId: number; // Referência para o usuário dono do contato no banco de dados
 }
 
