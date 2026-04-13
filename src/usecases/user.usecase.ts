@@ -17,6 +17,16 @@ export class UserUseCase {
         return await this.userRepository.create(input);
     }
 
+    // buscar usuário por email
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.userRepository.findByEmail(email);
+        if (!user) {
+            throw new Error('Usuario nao encontrado');
+        }
+        return user;
+    }
+
+
     // atualizar usuário
     async updateUser(email: string, input: UpdateUserInput): Promise<User> {
         const existingUser = await this.userRepository.findByEmail(email);
