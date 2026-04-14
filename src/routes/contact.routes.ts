@@ -26,7 +26,10 @@ export async function contactRoutes(fastify: FastifyInstance) {
                 telefone,
                 userEmail
             });
-    
+
+            if (!data) {
+                return reply.status(400).send({ erro: 'Erro ao criar contato' });
+            }
             return reply.status(201).send(data);
         } catch (error) {
             return reply.status(500).send(error);
@@ -34,8 +37,48 @@ export async function contactRoutes(fastify: FastifyInstance) {
     });
 
     /**
+     * Get: rota para listar todos os contatos d eum usuario
+     */
+    fastify.get<{Params: {email: string}}>('/user-contacts/:email', async (request, reply) => {
+        const userEmail = request.params.email as string;
+        try {
+            const data = await contactUseCase.showAllContactsByUserEmail(userEmail);
+            return reply.status(200).send(data);
+        } catch (error) {
+            return reply.status(500).send({ erro: 'Erro: ' + error });
+        }
+    });
+
+    /**
      * Update: update de contato existente
      */
-    
+    fastify.put<{ Params: { id: number }, Body: UpdateContactInput }>('/update/:id', async (request, reply) => {
+        const { id } = request.params;
+        try {
+            const data = await contactUseCase.updateContact(id, request.body);
+            if (!data) {
+                return reply.status(404).send({ erro: 'Erro ao atualizar contato' });
+            }
+            return reply.status(200).send(data);
+        } catch (error) {
+            return reply.status(500).send({ erro: 'Erro : ' + error });
+        }
+    });
+
+    /**
+     * Delete: delete de contato existente
+     */
+    fastify.delete<{ Params: { id: number } }>("/delete/:id", async (request, reply) => {
+        const { id } = request.params;
+        try {
+            const data = await contactUseCase.deleteContact(id);
+            if (!data) {
+                return reply.status(404).send({ erro: 'Erro ao deletar contato' });
+            }
+            return reply.status(200).send({ message: 'Contato deletado com sucesso' });
+        } catch (error) {
+            return reply.status(500).send({ erro: 'Erro: ' + error });
+        }
+    })
 
 }

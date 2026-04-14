@@ -1,4 +1,4 @@
-import type { Contact, CreateContactInput, contactRepository } from "../interfaces/contacts.interface.js";
+import type { Contact, CreateContactInput, UpdateContactInput, contactRepository } from "../interfaces/contacts.interface.js";
 import type { userRepository } from "../interfaces/users.interface.js";
 
 export class ContactUseCase {
@@ -25,7 +25,7 @@ export class ContactUseCase {
         return newContact;
     }
 
-    async getContactsByUserEmail(userEmail: string): Promise<Contact[]> {
+    async showAllContactsByUserEmail(userEmail: string): Promise<Contact[]> {
         const user = await this.userRepository.findByEmail(userEmail);
         if (!user) {
             throw new Error('Usuario nao encontrado para buscar contatos');
@@ -33,7 +33,7 @@ export class ContactUseCase {
         return await this.contactRepository.findAllByUser(user.id);
     }
 
-    async updateContact(id: number, input: Partial<CreateContactInput>): Promise<Contact> {
+    async updateContact(id: number, input: Partial<UpdateContactInput>): Promise<Contact> {
         const existingContact = await this.contactRepository.update(id, input);
         if (!existingContact) {
             throw new Error('Contato nao encontrado para atualizar');
