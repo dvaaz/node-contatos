@@ -33,7 +33,7 @@ export class ContactUseCase {
         return await this.contactRepository.findAllByUser(user.id);
     }
 
-    async updateContact(id: number, input: Partial<UpdateContactInput>): Promise<Contact> {
+    async updateContact(id: string, input: Partial<UpdateContactInput>): Promise<Contact> {
         const existingContact = await this.contactRepository.update(id, input);
         if (!existingContact) {
             throw new Error('Contato nao encontrado para atualizar');
@@ -42,7 +42,7 @@ export class ContactUseCase {
 
     }
 
-    async deleteContact(id: number): Promise<boolean> {
+    async deleteContact(id: string): Promise<boolean> {
         const existingContact = await this.contactRepository.delete(id);
         if (!existingContact) {
             throw new Error('Contato nao encontrado para deletar');

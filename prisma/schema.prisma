@@ -12,6 +12,7 @@ datasource db {
   provider = "sqlite"
 }
 
+// Roles do Usuario Admin ou User
 model Roles { // Define as responsabilidades
   id    String @id @default(uuid())
   name  String @unique
@@ -22,8 +23,9 @@ model Roles { // Define as responsabilidades
   @@map("roles") // Define como será a referência ao objeto 
 }
 
+// Todos usuarios do sistema, admin e users
 model Users { // Usuarios do sistema
-  id    Int     @id @default(autoincrement())
+  id    String     @id @default(uuid())
   name  String
   email String  @unique
   createdAt DateTime @default(now())
@@ -36,12 +38,13 @@ model Users { // Usuarios do sistema
   @@map("users") // Define como será a referência ao objeto 
 }
 
+// Contatos do sistema, não há tabela de ligacao, logo podem haver contatos repetidos, razõ a qual o email não é unico
 model Contacts { // Contatos do sistema
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String
   email String
   phone String
-  userId Int
+  userId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,9 +54,10 @@ model Contacts { // Contatos do sistema
   @@map("contacts") // Define como será a referência ao objeto
 }
 
+// Tabela de relacionamento entre usuários e suas responsabilidades, um usuário pode ter várias responsabilidades e uma responsabilidade pode ser atribuída a vários usuários
 model UserRoles { // Tabela de relacionamento entre usuários e suas responsabilidades
   id String @id @default(uuid())
-  userId Int
+  userId String
   roleId String
 
   user Users @relation(fields: [userId], references: [id])

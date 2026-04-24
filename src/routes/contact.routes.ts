@@ -52,7 +52,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     /**
      * Update: update de contato existente
      */
-    fastify.put<{ Params: { id: number }, Body: UpdateContactInput }>('/update/:id', async (request, reply) => {
+    fastify.put<{ Params: { id: string }, Body: UpdateContactInput }>('/update/:id', async (request, reply) => {
         const { id } = request.params;
         try {
             const data = await contactUseCase.updateContact(id, request.body);
@@ -68,7 +68,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     /**
      * Delete: delete de contato existente
      */
-    fastify.delete<{ Params: { id: number } }>("/delete/:id", async (request, reply) => {
+    fastify.delete<{ Params: { id: string } }>("/delete/:id", async (request, reply) => {
         const { id } = request.params;
         try {
             const data = await contactUseCase.deleteContact(id);

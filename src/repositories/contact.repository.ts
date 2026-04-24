@@ -13,7 +13,7 @@ export class ContactRepositoryPrisma implements contactRepository {
         })
     }
 
-    async findAllByUser(userId: number): Promise<Contact[]> {
+    async findAllByUser(userId: string): Promise<Contact[]> {
         return await prisma.contact.findMany({
             where:{
                 userId: userId
@@ -21,7 +21,7 @@ export class ContactRepositoryPrisma implements contactRepository {
         })
     }
 
-    async update(id: number, contact: UpdateContactInput): Promise<Contact> {
+    async update(id: string, contact: UpdateContactInput): Promise<Contact> {
         return await prisma.contact.update({
             where: {
                 id: id
@@ -30,7 +30,7 @@ export class ContactRepositoryPrisma implements contactRepository {
         })
     }
 
-    delete(id: number): Promise<boolean> {
+    delete(id: string): Promise<boolean> {
         return prisma.contact.delete({
             where: {
                 id: id

@@ -1,9 +1,9 @@
 export interface Contact {
-    id: number;
+    id: string;
     nome: string;
     email: string;
     telefone: string;
-    userId?: number;
+    userId?: string;
     // Campos opcionais para controle de criação e atualização, são definidos no backend mas podem ser solicitados pelo front
     createdAt?: Date;
     updatedAt?: Date;
@@ -22,7 +22,7 @@ export interface CreateContactData {
     nome: string;
     email: string;
     telefone: string;
-    userId: number; // Referência para o usuário dono do contato no banco de dados
+    userId: string; // Referência para o usuário dono do contato no banco de dados
 }
 
 export interface UpdateContactInput {
@@ -33,7 +33,7 @@ export interface UpdateContactInput {
 
 export interface contactRepository {
     create(contact: CreateContactData): Promise<Contact>;
-    findAllByUser(userId: number): Promise<Contact[]>;
-    update(id: number, contact: UpdateContactInput): Promise<Contact>;
-    delete(id: number): Promise<boolean>;
+    findAllByUser(userId: string): Promise<Contact[]>;
+    update(id: string, contact: UpdateContactInput): Promise<Contact>;
+    delete(id: string): Promise<boolean>;
 }
